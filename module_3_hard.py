@@ -9,7 +9,7 @@ def sum_nested_data(arg):
     if isinstance(arg, list) or isinstance(arg, tuple) or isinstance(arg, set):
         a = sum_nested_data(list(arg)[0]) + sum_nested_data(list(arg)[1:])
         return a
-    elif isinstance(arg, dict):
+    if isinstance(arg, dict):
         a = sum_nested_data(list(arg.keys())) + sum_nested_data(list(arg.values()))
         return a
 
