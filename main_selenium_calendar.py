@@ -3,7 +3,7 @@ from selenium.common import NoSuchElementException
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
-from time import sleep
+from time import sleep, strptime, strftime
 import datetime
 from datetime import timedelta
 
@@ -45,11 +45,11 @@ print(f"Current date is {current_date}")
 
 # Определяем новую дату через дельту
 new_date = current_date + datetime.timedelta(days=10, hours=-8)
-# print(f"New date is {new_date}")
+# print(f"Changed date is {new_date}")
 
 # Задаём формат новой даты, передаём в поле ввода
 new_date = new_date.strftime("%m.%d.%Y")
-print(f"New date is {new_date}")
+print(f"Changed date is {new_date}")
 date_input.send_keys(new_date)
 
 
@@ -60,12 +60,15 @@ date_time_input.send_keys(Keys.DELETE)
 sleep(2)
 
 # Задаём формат новой даты и времени, передаём в поле ввода
-new_date = current_date + datetime.timedelta(days=9, hours=-4)
-new_date_time = new_date.strftime("%B %d, %Y %H:%M %p")
-print(f"New date and time is {new_date_time}")
+# new_date = current_date + datetime.timedelta(days=-374, hours=7) # Через дельту
+new_date_time = datetime.datetime(2023, 12, 17,15, 15) # Передаём дату/время в явном виде
+new_date_time = new_date_time.strftime("%B %d, %Y %H:%M %p")
+
+print(f"Changed date and time is {new_date_time}")
 date_time_input.send_keys(new_date_time)
 
 action.move_by_offset(200, yoffset=200).click().perform() # передвинуть курсор и кликнуть, чтоб закрылся календарь
-# driver.save_screenshot(f"C:\\SeleniumTest\\pythonProject1\\screens\\Screenshot_calendar_{datetime.datetime.now().strftime("%Y.%m.%d_%H-%M-%S")}.png")
+driver.save_screenshot(f"C:\\SeleniumTest\\pythonProject1\\screens\\Screenshot_calendar_"
+                       f"{datetime.datetime.now().strftime("%Y.%m.%d_%H-%M-%S")}.png")
 # file.close()
-sleep(2)
+sleep(5)
